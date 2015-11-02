@@ -2,10 +2,10 @@ package id.symphonea.kenaldekat.api.model.response;
 
 public final class ProvinsiEntity {
     public final long id;
-    public final String name;
+    public final String nama;
 
-    public ProvinsiEntity(long id, String name) {
+    public ProvinsiEntity(long id, String nama) {
         this.id = id;
-        this.name = name;
+        this.nama = nama;
     }
 }

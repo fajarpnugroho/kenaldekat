@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/provinsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Bengkulu"
+        tools:ignore="UnusedAttribute" />
+    
+    <android.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image_capil"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/default_people"/>
+
+            <android.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <TextView
+                android:id="@+id/label_name_capil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Calon" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image_wapil"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/default_people" />
+
+            <android.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <TextView
+                android:id="@+id/label_name_wapil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Wakil" />
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    <android.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/label_dukungan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dukungan : " />
+
+        <TextView
+            android:id="@+id/dukungan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Partai Android Indonesia, Partai Android Indonesia, Partai Android Indonesia, Partai Android Indonesia" />
+
+    </LinearLayout>
+
+</LinearLayout>

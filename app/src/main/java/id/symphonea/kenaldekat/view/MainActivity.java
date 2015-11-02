@@ -1,32 +1,48 @@
 package id.symphonea.kenaldekat.view;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import com.squareup.okhttp.ResponseBody;
+import android.widget.AdapterView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import id.symphonea.kenaldekat.Injector;
 import id.symphonea.kenaldekat.R;
-import id.symphonea.kenaldekat.api.ApiConfig;
 import id.symphonea.kenaldekat.api.model.response.CandidatesResponse;
-import id.symphonea.kenaldekat.api.service.CandidateService;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import id.symphonea.kenaldekat.api.model.response.ProvincesResponse;
+import id.symphonea.kenaldekat.api.model.response.ProvinsiEntity;
+import id.symphonea.kenaldekat.presenter.MainPresenter;
+import id.symphonea.kenaldekat.view.adapter.CandidatesAdapter;
+import id.symphonea.kenaldekat.view.adapter.ProvincesAdapter;
+import id.symphonea.kenaldekat.view.listener.LoadMoreScrollListener;
+import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity implements MainView, AdapterView.OnItemSelectedListener {
 
-    @Inject CandidateService candidateService;
+    public static final int STATE_LOADING = 0;
+    public static final int STATE_DONE = 1;
+    public static final int STATE_ERROR = 2;
+    public static final int STATE_EMPTY = 3;
+
+    @Bind(R.id.toolbar) Toolbar toolbar;
+    @Bind(R.id.spinner_nav) Spinner spinnerNav;
+    @Bind(R.id.recyclerview) RecyclerView recyclerView;
+    @Bind(R.id.empty) TextView emptyView;
+    @Bind(R.id.loading) ProgressBar loading;
+
+    @Inject
+    MainPresenter presenter;
+
+    private CandidatesAdapter candidatesAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,56 +51,119 @@ public class MainActivity extends AppCompatActivity {
         Injector.INSTANCE.getApplicationComponent().inject(this);
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
+
+        initToolbar();
+        initRecyclerView();
+
+        presenter.initView(this);
+        presenter.loadProvinces();
+    }
+
+    @Override
+    public void initToolbar() {
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
-        Call<CandidatesResponse> callCandidates = candidateService.listOfCandidates(0, 10, null,
-                null, null, null, null, ApiConfig.API_KEY);
-        callCandidates.enqueue(new Callback<CandidatesResponse>() {
-            @Override
-            public void onResponse(Response<CandidatesResponse> response, Retrofit retrofit) {
-                if (response != null) {
-                    CandidatesResponse candidatesResponse = response.body();
-                    Log.v("CANDIDATES", candidatesResponse.data.toString());
-                }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-
-            }
-        });
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void initRecyclerView() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL_LIST));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addOnScrollListener(new LoadMoreScrollListener(presenter));
+
+        candidatesAdapter = new CandidatesAdapter();
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void showListProvince(ProvincesResponse response) {
+        Timber.v(response.data.toString());
+        ProvincesAdapter adapter = new ProvincesAdapter(this, response);
+        spinnerNav.setAdapter(adapter);
+        spinnerNav.setOnItemSelectedListener(this);
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    @Override
+    public void showListCandidates(CandidatesResponse candidatesResponse) {
+        reset(STATE_DONE);
+        if (candidatesResponse.data.results.candidates.size() > 0) {
+            candidatesAdapter.setCandidatesResponse(candidatesResponse.data.results.candidates);
+            recyclerView.setAdapter(candidatesAdapter);
+        } else {
+            reset(STATE_EMPTY);
         }
-
-        return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void showLoadingView() {
+        loading.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoadingView() {
+        loading.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showErrorView() {
+
+    }
+
+    @Override
+    public void hideErrorView() {
+
+    }
+
+    @Override
+    public void showEmptyView() {
+        emptyView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideEmptyView() {
+        emptyView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void reset(int state) {
+        switch (state) {
+            case STATE_LOADING:
+                showLoadingView();
+                hideErrorView();
+                hideEmptyView();
+                break;
+            case STATE_DONE:
+                hideLoadingView();
+                hideErrorView();
+                hideEmptyView();
+                break;
+            case STATE_ERROR:
+                hideLoadingView();
+                showErrorView();
+                hideEmptyView();
+                break;
+            case STATE_EMPTY:
+                hideLoadingView();
+                hideErrorView();
+                showEmptyView();
+                break;
+        }
+    }
+
+    @Override
+    public void showMoreList(CandidatesResponse candidatesResponse) {
+        candidatesAdapter.addedMoreList(candidatesResponse.data.results.candidates);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        ProvinsiEntity provinsiEntity = (ProvinsiEntity) parent.getItemAtPosition(position);
+        reset(STATE_LOADING);
+        presenter.loadCandidates(provinsiEntity);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {}
 }

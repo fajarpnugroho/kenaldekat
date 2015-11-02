@@ -18,8 +18,11 @@ public class ApiModule {
     }
 
     @Provides
+    @Singleton
     OkHttpClient provideOkHttpClient() {
-        return new OkHttpClient();
+        OkHttpClient client = new OkHttpClient();
+        client.interceptors().add(new LoggingInterceptor());
+        return client;
     }
 
     @Provides
@@ -33,6 +36,7 @@ public class ApiModule {
     }
 
     @Provides
+    @Singleton
     CandidateService provideCandidateService(Retrofit retrofit){
         return retrofit.create(CandidateService.class);
     }
