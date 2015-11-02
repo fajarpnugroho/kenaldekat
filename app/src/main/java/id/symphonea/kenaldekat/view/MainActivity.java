@@ -97,6 +97,16 @@ public class MainActivity extends BaseActivity implements MainView, AdapterView.
     }
 
     @Override
+    public void showList() {
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideList() {
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
     public void showLoadingView() {
         loading.setVisibility(View.VISIBLE);
     }
@@ -136,16 +146,19 @@ public class MainActivity extends BaseActivity implements MainView, AdapterView.
                 break;
             case STATE_DONE:
                 hideLoadingView();
+                showList();
                 hideErrorView();
                 hideEmptyView();
                 break;
             case STATE_ERROR:
                 hideLoadingView();
+                hideList();
                 showErrorView();
                 hideEmptyView();
                 break;
             case STATE_EMPTY:
                 hideLoadingView();
+                hideList();
                 hideErrorView();
                 showEmptyView();
                 break;
@@ -159,6 +172,7 @@ public class MainActivity extends BaseActivity implements MainView, AdapterView.
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        hideList();
         ProvinsiEntity provinsiEntity = (ProvinsiEntity) parent.getItemAtPosition(position);
         reset(STATE_LOADING);
         presenter.loadCandidates(provinsiEntity);

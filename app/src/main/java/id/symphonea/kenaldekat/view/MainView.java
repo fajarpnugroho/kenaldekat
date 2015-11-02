@@ -12,6 +12,10 @@ public interface MainView {
 
     void showListCandidates(CandidatesResponse candidatesResponse);
 
+    void showList();
+
+    void hideList();
+
     void showLoadingView();
 
     void hideLoadingView();

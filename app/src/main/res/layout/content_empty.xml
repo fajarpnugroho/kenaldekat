@@ -3,7 +3,10 @@
     android:id="@+id/empty"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="Not found"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="?android:attr/windowBackground"
+    android:clickable="true"
+    android:focusable="true"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="?android:attr/windowBackground"/>
+    android:text="Not found" />
