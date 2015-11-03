@@ -1,6 +1,7 @@
 package id.symphonea.kenaldekat.view.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,25 @@ public class ProvincesAdapter extends BaseAdapter {
     }
 
     @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        if (convertView == null) {
+
+            convertView = layoutInflater.inflate(R.layout.item_view_provinces, parent, false);
+            holder = new ViewHolder(convertView);
+
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        holder.bind(getItem(position));
+        holder.setTextcolor(Color.GRAY);
+
+        return convertView;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
@@ -52,6 +72,7 @@ public class ProvincesAdapter extends BaseAdapter {
         }
 
         holder.bind(getItem(position));
+        holder.setTextcolor(Color.WHITE);
 
         return convertView;
     }
@@ -74,6 +95,10 @@ public class ProvincesAdapter extends BaseAdapter {
             }
 
             label.setTag(entity);
+        }
+
+        public void setTextcolor(int color) {
+            label.setTextColor(color);
         }
     }
 }

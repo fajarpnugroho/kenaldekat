@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">#ffffff</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -13,5 +14,15 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ActionBarThemeOverlay" parent="">
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="colorControlHighlight">#ff33b5e5</item>
+    </style>
+
+    <style name="Widget.MyTheme.HeaderBar.Spinner" parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:theme">@style/ActionBarThemeOverlay</item>
+    </style>
 
 </resources>

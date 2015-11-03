@@ -81,6 +81,7 @@ public class MainActivity extends BaseActivity implements MainView, AdapterView.
     public void showListProvince(ProvincesResponse response) {
         Timber.v(response.data.toString());
         ProvincesAdapter adapter = new ProvincesAdapter(this, response);
+
         spinnerNav.setAdapter(adapter);
         spinnerNav.setOnItemSelectedListener(this);
     }

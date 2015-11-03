@@ -82,6 +82,8 @@ public class MainPresenter {
 
         if (provinsiEntity != null) {
             provinceId = String.valueOf(provinsiEntity.id);
+        } else {
+            provinceId = null;
         }
 
         Call<CandidatesResponse> responseCall = candidateService.listOfCandidates(offset,
