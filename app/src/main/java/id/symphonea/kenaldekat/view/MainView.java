@@ -3,8 +3,7 @@ package id.symphonea.kenaldekat.view;
 import id.symphonea.kenaldekat.api.model.response.CandidatesResponse;
 import id.symphonea.kenaldekat.api.model.response.ProvincesResponse;
 
-public interface MainView {
-    void initToolbar();
+public interface MainView extends BaseView{
 
     void initRecyclerView();
 

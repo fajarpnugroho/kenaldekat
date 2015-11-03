@@ -1,5 +1,6 @@
 package id.symphonea.kenaldekat.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,12 +27,14 @@ import id.symphonea.kenaldekat.view.adapter.ProvincesAdapter;
 import id.symphonea.kenaldekat.view.listener.LoadMoreScrollListener;
 import timber.log.Timber;
 
-public class MainActivity extends BaseActivity implements MainView, AdapterView.OnItemSelectedListener {
+public class MainActivity extends BaseActivity implements MainView,
+        AdapterView.OnItemSelectedListener, CandidatesAdapter.Listener {
 
     public static final int STATE_LOADING = 0;
     public static final int STATE_DONE = 1;
     public static final int STATE_ERROR = 2;
     public static final int STATE_EMPTY = 3;
+    public static final String EXTRA_PESERTA_ID = "extra_peserta_id";
 
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.spinner_nav) Spinner spinnerNav;
@@ -74,7 +77,7 @@ public class MainActivity extends BaseActivity implements MainView, AdapterView.
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addOnScrollListener(new LoadMoreScrollListener(presenter));
 
-        candidatesAdapter = new CandidatesAdapter();
+        candidatesAdapter = new CandidatesAdapter(this);
     }
 
     @Override
@@ -181,4 +184,11 @@ public class MainActivity extends BaseActivity implements MainView, AdapterView.
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}
+
+    @Override
+    public void onItemClickListener(String pesertaId) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(EXTRA_PESERTA_ID, pesertaId);
+        startActivity(intent);
+    }
 }

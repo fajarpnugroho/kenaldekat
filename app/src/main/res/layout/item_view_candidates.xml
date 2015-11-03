@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:background="?attr/selectableItemBackground"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/provinsi"
@@ -13,9 +14,9 @@
         android:fontFamily="sans-serif-condensed"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:text="Bengkulu"
-        tools:ignore="UnusedAttribute" />
-    
+        tools:ignore="UnusedAttribute"
+        tools:text="Bengkulu" />
+
     <android.widget.Space
         android:layout_width="match_parent"
         android:layout_height="8dp" />
@@ -32,11 +33,13 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/image_capil"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/default_people"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CALON"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-light"/>
 
             <android.widget.Space
                 android:layout_width="match_parent"
@@ -56,11 +59,13 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/image_wapil"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/default_people" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WAKIL"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-light"/>
 
             <android.widget.Space
                 android:layout_width="match_parent"
@@ -74,7 +79,7 @@
         </LinearLayout>
 
     </LinearLayout>
-    
+
     <android.widget.Space
         android:layout_width="match_parent"
         android:layout_height="8dp" />

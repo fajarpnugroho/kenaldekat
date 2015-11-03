@@ -3,17 +3,19 @@ package id.symphonea.kenaldekat.view.listener;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import id.symphonea.kenaldekat.presenter.BasePresenter;
 import id.symphonea.kenaldekat.presenter.MainPresenter;
+import id.symphonea.kenaldekat.presenter.MediaPresenter;
 
 public class LoadMoreScrollListener extends RecyclerView.OnScrollListener {
 
     private static final int PAGE_MULTIPLIER = 2;
 
-    private MainPresenter presenter;
+    private BasePresenter presenter;
 
     private int visibleItemsInOnePage = 0;
 
-    public LoadMoreScrollListener(MainPresenter presenter) {
+    public LoadMoreScrollListener(BasePresenter presenter) {
         this.presenter = presenter;
     }
 
@@ -29,7 +31,11 @@ public class LoadMoreScrollListener extends RecyclerView.OnScrollListener {
             visibleItemsInOnePage = recyclerView.getChildCount();
         }
         if (isStreamEnding((LinearLayoutManager) recyclerView.getLayoutManager())) {
-            presenter.onScrollEnds();
+            if (presenter instanceof MainPresenter) {
+                ((MainPresenter) presenter).onScrollEnds();
+            } else if (presenter instanceof MediaPresenter) {
+                ((MediaPresenter) presenter).onScrollEnds();
+            }
         }
     }
 

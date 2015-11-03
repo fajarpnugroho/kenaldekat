@@ -26,7 +26,7 @@ import retrofit.Retrofit;
 import timber.log.Timber;
 
 @Singleton
-public class MainPresenter {
+public class MainPresenter implements BasePresenter {
 
     public static final String UNEXPECTED_ERROR = "Unexpected error";
     public static final String READER_ALREADY_BEEN_CLOSED = "Reader already been closed";
