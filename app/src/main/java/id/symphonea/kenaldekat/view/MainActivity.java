@@ -35,6 +35,8 @@ public class MainActivity extends BaseActivity implements MainView,
     public static final int STATE_ERROR = 2;
     public static final int STATE_EMPTY = 3;
     public static final String EXTRA_PESERTA_ID = "extra_peserta_id";
+    public static final String EXTRA_URL = "extra_url";
+    public static final String EXTRA_PROVINSI = "provinsi";
 
     @Bind(R.id.toolbar) Toolbar toolbar;
     @Bind(R.id.spinner_nav) Spinner spinnerNav;
@@ -186,9 +188,11 @@ public class MainActivity extends BaseActivity implements MainView,
     public void onNothingSelected(AdapterView<?> parent) {}
 
     @Override
-    public void onItemClickListener(String pesertaId) {
+    public void onItemClickListener(String pesertaId, String url, String provinsi) {
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(EXTRA_PESERTA_ID, pesertaId);
+        intent.putExtra(EXTRA_URL, url);
+        intent.putExtra(EXTRA_PROVINSI, provinsi);
         startActivity(intent);
     }
 }

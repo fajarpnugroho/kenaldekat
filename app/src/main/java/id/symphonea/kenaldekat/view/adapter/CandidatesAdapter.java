@@ -83,18 +83,19 @@ public class CandidatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             dukungan.setText(candidateEntity.dukungan);
 
-            itemView.setTag(candidateEntity.id_peserta);
+            itemView.setTag(candidateEntity);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            String pesertaId = String.valueOf(v.getTag());
-            listener.onItemClickListener(pesertaId);
+            CandidateEntity candidateEntity = (CandidateEntity) v.getTag();
+            listener.onItemClickListener(String.valueOf(candidateEntity.id_peserta),
+                    candidateEntity.sumber, candidateEntity.provinsi.nama);
         }
     }
 
     public interface Listener {
-        void onItemClickListener(String pesertaId);
+        void onItemClickListener(String pesertaId, String url, String provinsi);
     }
 }
