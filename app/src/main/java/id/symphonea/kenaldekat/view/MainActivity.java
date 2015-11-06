@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.facebook.appevents.AppEventsLogger;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
@@ -194,5 +196,17 @@ public class MainActivity extends BaseActivity implements MainView,
         intent.putExtra(EXTRA_URL, url);
         intent.putExtra(EXTRA_PROVINSI, provinsi);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AppEventsLogger.activateApp(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        AppEventsLogger.deactivateApp(this);
     }
 }

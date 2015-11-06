@@ -8,4 +8,6 @@ public class KenalDekatApp extends Application {
         super.onCreate();
         Injector.INSTANCE.initializeComponent(this);
     }
+
+
 }

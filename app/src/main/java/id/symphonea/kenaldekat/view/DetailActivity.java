@@ -84,7 +84,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
         adapter.addFragment(ProfileFragment.newInstance(paslonId), "PROFILE");
 
         adapter.addFragment(MediaFragment.newInstance(paslonId), "MEDIA");
-        //adapter.addFragment(new DukunganFragment(), "DUKUNGAN");
+        adapter.addFragment(new DukunganFragment(), "DUKUNGAN");
 
         viewPager.setAdapter(adapter);
         slidingTabs.setupWithViewPager(viewPager);
