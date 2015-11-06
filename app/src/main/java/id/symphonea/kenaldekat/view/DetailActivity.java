@@ -87,6 +87,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
         adapter.addFragment(new DukunganFragment(), "DUKUNGAN");
 
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
         slidingTabs.setupWithViewPager(viewPager);
     }
 
