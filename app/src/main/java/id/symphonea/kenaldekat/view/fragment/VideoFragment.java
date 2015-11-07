@@ -1,5 +1,7 @@
 package id.symphonea.kenaldekat.view.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -83,6 +85,8 @@ public class VideoFragment extends BaseFragment implements VideoView, BeritaAdap
 
     @Override
     public void onItemClickListener(String link) {
-
+        Uri uri = Uri.parse(link);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        getActivity().startActivity(intent);
     }
 }
