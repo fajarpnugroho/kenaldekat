@@ -68,8 +68,10 @@ public class VideoFragment extends BaseFragment implements VideoView, BeritaAdap
 
     @Override
     public void showListBerita(NewsResponse newsResponse) {
-        adapter.setNewsEntities(newsResponse.data.results.news);
-        recyclerView.setAdapter(adapter);
+        if (newsResponse.data.results.news.size() > 0) {
+            adapter.setNewsEntities(newsResponse.data.results.news);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     @Override
@@ -85,8 +87,10 @@ public class VideoFragment extends BaseFragment implements VideoView, BeritaAdap
 
     @Override
     public void onItemClickListener(String link) {
-        Uri uri = Uri.parse(link);
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        getActivity().startActivity(intent);
+        if (!link.equals("Tidak ada")) {
+            Uri uri = Uri.parse(link);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            getActivity().startActivity(intent);
+        }
     }
 }

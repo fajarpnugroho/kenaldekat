@@ -71,8 +71,10 @@ public class MediaFragment extends BaseFragment implements MediaView, MediaAdapt
 
     @Override
     public void showJejakMedia(MediaResponse mediaResponse) {
-        mediaAdapter.setMediaEntityList(mediaResponse.data.results.rekam_jejak);
-        recyclerView.setAdapter(mediaAdapter);
+        if (mediaResponse.data.results.rekam_jejak.size() > 0) {
+            mediaAdapter.setMediaEntityList(mediaResponse.data.results.rekam_jejak);
+            recyclerView.setAdapter(mediaAdapter);
+        }
     }
 
     @Override

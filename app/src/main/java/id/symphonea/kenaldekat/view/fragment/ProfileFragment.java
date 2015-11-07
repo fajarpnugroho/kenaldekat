@@ -98,6 +98,9 @@ public class ProfileFragment extends BaseFragment implements ProfileView {
                 }
             });
 
+        }  else {
+            content.setVisibility(View.GONE);
+            return;
         }
     }
 

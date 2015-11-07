@@ -73,11 +73,17 @@ public class BeritaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         public void bind(NewsEntity newsEntity) {
             String imageUrl = StringUtils.getYoutubeThumbnail(newsEntity.link);
-            if (imageUrl != null) {
-                Picasso.with(itemView.getContext())
-                        .load(imageUrl)
-                        .into(thumbnail);
+
+            // quick return
+            if (imageUrl == null) {
+                itemView.setVisibility(View.GONE);
+                return;
             }
+
+            Picasso.with(itemView.getContext())
+                    .load(imageUrl)
+                    .into(thumbnail);
+
 
             descText.setText(newsEntity.description);
             sourceView.bind(newsEntity.resource.name, newsEntity.date);

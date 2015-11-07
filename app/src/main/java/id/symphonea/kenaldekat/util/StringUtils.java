@@ -26,6 +26,10 @@ public final class StringUtils {
     }
 
     public static String currencyFormat(String nominal) {
+        if (nominal.equals("Tidak diset")) {
+            nominal = "0";
+        }
+
         String rupiah = "";
 
         NumberFormat rupiahFormat = NumberFormat.getInstance(Locale.GERMANY);
