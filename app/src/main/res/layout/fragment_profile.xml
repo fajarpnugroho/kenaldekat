@@ -11,7 +11,63 @@
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <id.symphonea.kenaldekat.view.widget.CandidateProfileView
+                android:id="@+id/view_calon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <id.symphonea.kenaldekat.view.widget.CandidateProfileView
+                android:id="@+id/view_wakil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <id.symphonea.kenaldekat.view.widget.VisionMissionView
+                android:id="@+id/view_vision_mission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <id.symphonea.kenaldekat.view.widget.DanaView
+                android:id="@+id/view_dana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <FrameLayout
+                android:id="@+id/btn_sumber"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_normal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUMBER"
+                    android:fontFamily="sans-serif-condensed"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:layout_gravity="center"
+                    android:textSize="22sp" />
+            </FrameLayout>
+
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 
@@ -21,6 +77,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>

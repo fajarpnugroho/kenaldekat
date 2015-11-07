@@ -3,6 +3,9 @@ package id.symphonea.kenaldekat.util;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public final class StringUtils {
     public StringUtils() {}
 
@@ -20,5 +23,15 @@ public final class StringUtils {
         }
 
         return "http://img.youtube.com/vi/" + youtubeId + "/sddefault.jpg";
+    }
+
+    public static String currencyFormat(String nominal) {
+        String rupiah = "";
+
+        NumberFormat rupiahFormat = NumberFormat.getInstance(Locale.GERMANY);
+
+        rupiah = rupiahFormat.format(Double.parseDouble(nominal));
+
+        return "Rp " + rupiah + ", -";
     }
 }

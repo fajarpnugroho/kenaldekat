@@ -1,16 +1,15 @@
 package id.symphonea.kenaldekat.view.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,19 +17,26 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import id.symphonea.kenaldekat.Injector;
 import id.symphonea.kenaldekat.R;
+import id.symphonea.kenaldekat.api.model.response.DanaKampanyeResponse;
 import id.symphonea.kenaldekat.api.model.response.PaslonEntity;
 import id.symphonea.kenaldekat.api.model.response.VisionMissionResponse;
 import id.symphonea.kenaldekat.presenter.ProfilePresenter;
 import id.symphonea.kenaldekat.view.ProfileView;
-import id.symphonea.kenaldekat.view.widget.CandidateContentView;
-import id.symphonea.kenaldekat.view.widget.CandidateGroupView;
-import id.symphonea.kenaldekat.view.widget.ContentView;
+import id.symphonea.kenaldekat.view.widget.CandidateProfileView;
+import id.symphonea.kenaldekat.view.widget.DanaView;
+import id.symphonea.kenaldekat.view.widget.VisionMissionView;
 
 public class ProfileFragment extends BaseFragment implements ProfileView {
 
     public static final String ARG_PESERTA_ID = "arg_peserta_id";
 
-    @Bind(R.id.content) LinearLayout contentRoot;
+    @Bind(R.id.view_calon) CandidateProfileView calonView;
+    @Bind(R.id.view_wakil) CandidateProfileView wakilView;
+    @Bind(R.id.view_vision_mission) VisionMissionView visionMissionView;
+    @Bind(R.id.view_dana) DanaView danaView;
+    @Bind(R.id.btn_sumber) FrameLayout btnSumber;
+
+    @Bind(R.id.content) LinearLayout content;
     @Bind(R.id.loading) ProgressBar loading;
 
     @Inject ProfilePresenter presenter;
@@ -67,24 +73,38 @@ public class ProfileFragment extends BaseFragment implements ProfileView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.loadDetailVisionMission(getArguments().getString(ARG_PESERTA_ID));
+        presenter.loadDanaKampanye(getArguments().getString(ARG_PESERTA_ID));
     }
 
     @Override
-    public void showDataProfile(VisionMissionResponse visionMissionResponse) {
+    public void showDataProfile(final VisionMissionResponse visionMissionResponse) {
         if (visionMissionResponse.data.results.count > 0) {
+            PaslonEntity calonEntity = visionMissionResponse.data.results.vision_missions
+                    .get(0).paslon.get(0);
 
-            List<PaslonEntity> paslon = visionMissionResponse.data.results.vision_missions
-                    .get(0).paslon;
+            PaslonEntity wakilEntity = visionMissionResponse.data.results.vision_missions.get(0)
+                    .paslon.get(1);
 
-            String visi = visionMissionResponse.data.results.vision_missions.get(0).visi;
-            String misi = visionMissionResponse.data.results.vision_missions.get(0).misi;
-            String sumber = visionMissionResponse.data.results.vision_missions.get(0).sumber;
+            calonView.bind(calonEntity);
+            wakilView.bind(wakilEntity);
 
-            generatedPaslon(paslon);
-            generatedVisi(visi);
-            generatedMisi(misi);
-            generatedSumber(sumber);
+            visionMissionView.bind(visionMissionResponse.data.results.vision_missions.get(0).visi,
+                    visionMissionResponse.data.results.vision_missions.get(0).misi);
+
+            btnSumber.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showSumber(visionMissionResponse.data.results.vision_missions.get(0).sumber);
+                }
+            });
+
         }
+    }
+
+    private void showSumber(String sumber) {
+        Uri uri = Uri.parse(sumber);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        getActivity().startActivity(intent);
     }
 
     @Override
@@ -97,46 +117,9 @@ public class ProfileFragment extends BaseFragment implements ProfileView {
         loading.setVisibility(View.GONE);
     }
 
-    private void generatedSumber(String sumber) {
-        ContentView view = new ContentView(getActivity());
-        view.bind("Sumber", sumber);
-
-        contentRoot.addView(view);
-    }
-
-    private void generatedMisi(String misi) {
-        ContentView view = new ContentView(getActivity());
-        view.bind("Misi", misi);
-
-        contentRoot.addView(view);
-    }
-
-    private void generatedVisi(String visi) {
-        ContentView view = new ContentView(getActivity());
-        view.bind("Visi", visi);
-
-        contentRoot.addView(view);
-    }
-
-    private void generatedPaslon(List<PaslonEntity> paslon) {
-        for (PaslonEntity paslonEntity : paslon) {
-            List<CandidateContentView> views = new ArrayList<>();
-
-            views.add(generateCandidateView("Nama", paslonEntity.nama));
-            views.add(generateCandidateView("Pekerjaan", paslonEntity.pekerjaan));
-
-
-            CandidateGroupView groupView = new CandidateGroupView(getActivity());
-            groupView.bind(paslonEntity.kind, views);
-
-            contentRoot.addView(groupView);
-        }
-
-    }
-
-    private CandidateContentView generateCandidateView(String key, String value) {
-        CandidateContentView contentView = new CandidateContentView(getActivity());
-        contentView.bind(key, value);
-        return contentView;
+    @Override
+    public void showDanaKampanye(DanaKampanyeResponse danaKampanyeResponse) {
+        content.setVisibility(View.VISIBLE);
+        danaView.bind(danaKampanyeResponse.data.results.danakampanye.get(0));
     }
 }

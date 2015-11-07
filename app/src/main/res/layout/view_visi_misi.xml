@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:text="VISI / MISI"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="22sp"
+        android:textStyle="italic" />
+
+    <android.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/visi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Visi"
+            android:textColor="@android:color/black"
+            tools:text="MEWUJUDKAN BENGKULU YANG MAJU, SEJAHTERA, BERMARTABAT, DAN BERDAYA SAING TINGGI" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/misi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Misi"
+            android:textColor="@android:color/black"
+            tools:text="MEWUJUDKAN BENGKULU YANG MAJU, SEJAHTERA, BERMARTABAT, DAN BERDAYA SAING TINGGI" />
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

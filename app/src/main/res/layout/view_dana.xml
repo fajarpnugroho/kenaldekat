@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:text="DANA KAMPANYE"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="22sp"
+        android:textStyle="italic" />
+
+    <android.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/penerimaan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Penerimaan"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:gravity="right"
+            tools:text="Rp 110.000.000, -" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/operasi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Pengeluaran Operasi"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:gravity="right"
+            tools:text="Tidak tercantum" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/modal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Pengeluaran Modal"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:gravity="right"
+            tools:text="Tidak tercantum" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/lain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Pengeluaran Lain"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:gravity="right"
+            tools:text="Tidak tercantum" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/saldo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Saldo"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:gravity="right"
+            tools:text="Rp 110.000.000, -" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/kas_rek_khusus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Kas Rekening Khusus"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:gravity="right"
+            tools:text="Rp 110.000.000, -" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/kas_bendahara"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Kas Bendahara"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:gravity="right"
+            tools:text="Rp 110.000.000, -" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/barang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Barang"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:gravity="right"
+            tools:text="Rp 110.000.000, -" />
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>
