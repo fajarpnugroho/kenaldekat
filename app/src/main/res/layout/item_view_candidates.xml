@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -12,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="22sp"
+        android:textStyle="italic"
         tools:ignore="UnusedAttribute"
         tools:text="Bengkulu" />
 
@@ -33,24 +33,24 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <TextView
+            <ImageView
+                android:id="@+id/image_capil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CALON"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-light"/>
-
-            <android.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                android:src="@drawable/lcalon" />
 
             <TextView
                 android:id="@+id/label_name_capil"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="18sp"
                 tools:text="Calon" />
         </LinearLayout>
+
+        <android.widget.Space
+            android:layout_width="8dp"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -59,22 +59,18 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <TextView
+            <ImageView
+                android:id="@+id/image_wapil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="WAKIL"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-light"/>
-
-            <android.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="8dp" />
+                android:src="@drawable/lcalon" />
 
             <TextView
                 android:id="@+id/label_name_wapil"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textSize="18sp"
                 tools:text="Wakil" />
         </LinearLayout>
 

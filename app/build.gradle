@@ -73,10 +73,11 @@ dependencies {
     compile 'com.jakewharton.timber:timber:3.0.2'
     compile 'com.jakewharton:butterknife:7.0.1'
 
-    compile 'com.squareup.picasso:picasso:2.2.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0-RC2'
 
     compile 'com.facebook.android:facebook-android-sdk:4.6.0'
 }

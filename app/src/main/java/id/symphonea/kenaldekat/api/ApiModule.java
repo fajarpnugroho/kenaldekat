@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import id.symphonea.kenaldekat.api.service.BeritaService;
 import id.symphonea.kenaldekat.api.service.CandidateService;
 import id.symphonea.kenaldekat.api.service.MediaService;
 import retrofit.GsonConverterFactory;
@@ -46,5 +47,11 @@ public class ApiModule {
     @Singleton
     MediaService provideMediaService(Retrofit retrofit) {
         return retrofit.create(MediaService.class);
+    }
+
+    @Provides
+    @Singleton
+    BeritaService provideBeritaService(Retrofit retrofit) {
+        return retrofit.create(BeritaService.class);
     }
 }

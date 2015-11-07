@@ -21,6 +21,7 @@ import id.symphonea.kenaldekat.view.fragment.DukunganFragment;
 import id.symphonea.kenaldekat.view.fragment.MediaFragment;
 import id.symphonea.kenaldekat.view.fragment.ProfileFragment;
 import id.symphonea.kenaldekat.view.fragment.SimpleTextFragment;
+import id.symphonea.kenaldekat.view.fragment.VideoFragment;
 
 public class DetailActivity extends BaseActivity implements DetailView {
 
@@ -82,8 +83,8 @@ public class DetailActivity extends BaseActivity implements DetailView {
         DetailPageAdapter adapter = new DetailPageAdapter(getSupportFragmentManager());
 
         adapter.addFragment(ProfileFragment.newInstance(paslonId), "PROFILE");
-
         adapter.addFragment(MediaFragment.newInstance(paslonId), "MEDIA");
+        adapter.addFragment(VideoFragment.newInstance(paslonId), "VIDEO");
         adapter.addFragment(new DukunganFragment(), "DUKUNGAN");
 
         viewPager.setAdapter(adapter);
