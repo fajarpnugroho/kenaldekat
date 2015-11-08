@@ -76,7 +76,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             PaslonEntity capil = candidateEntity.paslon.get(0);
             PaslonEntity wapil = candidateEntity.paslon.get(1);
 
-            provinsi.setText(candidateEntity.provinsi.nama);
+            provinsi.setText(candidateEntity.provinsi.nama + " / " + candidateEntity.daerah.nama);
 
             nameCapil.setText(capil.nama);
             nameWapil.setText(wapil.nama);

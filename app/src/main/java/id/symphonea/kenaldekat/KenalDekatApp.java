@@ -11,6 +11,12 @@ public class KenalDekatApp extends Application {
         Injector.INSTANCE.initializeComponent(this);
 
         FacebookSdk.sdkInitialize(this);
+
+/*        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, ApiConfig.PARSE_KEY,
+                ApiConfig.PARSE_CLIENT);
+
+        ParseObject.registerSubclass(DukunganParseObject.class);*/
     }
 
 
