@@ -1,0 +1,18 @@
+{
+  "data" : [
+    {
+      "id" : 1,
+      "nama" : "Shindy",
+      "rating" : 4,
+      "dukungan" : "Sukseskan Pilkada 2015 #PilkadaSerentak",
+      "createAt" : "2015-11-08"
+    },
+    {
+      "id" : 2,
+      "nama" : "Fajar",
+      "rating" : 5,
+      "dukungan" : "Maju terus pak!",
+      "createAt" : "2015-11-07"
+    }
+  ]
+}

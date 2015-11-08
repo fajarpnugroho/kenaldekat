@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Berikan penilaian kamu terhadap peserta pilkada ini."
+        android:textSize="22sp"
+        android:fontFamily="sans-serif-condensed"/>
+
+    <RatingBar
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0" />
+    
+    <android.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+    
+    <EditText
+        android:id="@+id/dukungan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:hint="Tulis pendapat"
+        android:textColor="@android:color/black"/>
+
+</LinearLayout>
