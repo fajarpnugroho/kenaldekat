@@ -101,7 +101,7 @@ public class DukunganFragment extends BaseFragment implements DukunganView,
         // Pass data from parse if user already give a rating.
         AlertDialog.Builder dialogDukungan = new AlertDialog.Builder(getActivity());
         dialogDukungan.setView(new DialogDukungan(getActivity()));
-        dialogDukungan.setPositiveButton("SUBMIT", new DialogInterface.OnClickListener() {
+        dialogDukungan.setPositiveButton("KIRIM", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // send rating and dukungan to parse

@@ -85,7 +85,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
         adapter.addFragment(ProfileFragment.newInstance(paslonId), "PROFILE");
         adapter.addFragment(MediaFragment.newInstance(paslonId), "MEDIA");
         adapter.addFragment(VideoFragment.newInstance(paslonId), "VIDEO");
-        adapter.addFragment(new DukunganFragment(), "DUKUNGAN");
+        adapter.addFragment(new DukunganFragment(), "JAJAK PENDAPAT");
 
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
