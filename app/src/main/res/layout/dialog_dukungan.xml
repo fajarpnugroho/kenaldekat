@@ -27,6 +27,7 @@
         android:id="@+id/dukungan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        android:hint="Berikan juga dukungan kamu"/>
+        android:hint="Berikan juga dukungan kamu"
+        android:textColor="@android:color/black"/>
 
 </LinearLayout>

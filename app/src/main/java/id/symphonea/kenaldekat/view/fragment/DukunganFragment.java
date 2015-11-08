@@ -17,6 +17,8 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.login.LoginResult;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
@@ -24,6 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import id.symphonea.kenaldekat.Injector;
 import id.symphonea.kenaldekat.R;
+import id.symphonea.kenaldekat.api.model.response.DukunganEntity;
 import id.symphonea.kenaldekat.api.model.response.DukunganResponse;
 import id.symphonea.kenaldekat.presenter.DukunganPresenter;
 import id.symphonea.kenaldekat.view.DividerItemDecoration;
@@ -47,6 +50,7 @@ public class DukunganFragment extends BaseFragment implements DukunganView,
 
     private int ratingNum;
     private String dukungan;
+    private DukunganEntity postDukungan;
 
     public DukunganFragment() {}
 
@@ -101,6 +105,7 @@ public class DukunganFragment extends BaseFragment implements DukunganView,
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // send rating and dukungan to parse
+                presenter.postDukungan(ratingNum, dukungan);
 
             }
         });
@@ -125,8 +130,14 @@ public class DukunganFragment extends BaseFragment implements DukunganView,
 
     @Override
     public void showListDukungan(DukunganResponse dukunganResponse) {
+        content.setVisibility(View.VISIBLE);
         adapter.setDukunganEntityList(dukunganResponse.data);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void addedDukungan(DukunganEntity dukunganEntity) {
+        adapter.addNewData(dukunganEntity);
     }
 
     @Override

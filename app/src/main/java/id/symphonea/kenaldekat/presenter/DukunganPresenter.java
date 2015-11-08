@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import id.symphonea.kenaldekat.KenalDekatApp;
+import id.symphonea.kenaldekat.api.model.response.DukunganEntity;
 import id.symphonea.kenaldekat.api.model.response.DukunganResponse;
 import id.symphonea.kenaldekat.util.AssetUtils;
 import id.symphonea.kenaldekat.view.DukunganView;
@@ -58,5 +59,10 @@ public class DukunganPresenter {
                 Timber.e(READER_ALREADY_BEEN_CLOSED);
             }
         }
+    }
+
+    public void postDukungan(int ratingNum, String dukungan) {
+        DukunganEntity dukunganEntity = new DukunganEntity(3, "Test User", ratingNum, dukungan, "2015-07-9");
+        view.addedDukungan(dukunganEntity);
     }
 }

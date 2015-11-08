@@ -41,6 +41,11 @@ public class DukunganAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return dukunganEntityList.size();
     }
 
+    public void addNewData(DukunganEntity dukunganEntity) {
+        dukunganEntityList.add(dukunganEntity);
+        notifyDataSetChanged();
+    }
+
     public static class Holder extends RecyclerView.ViewHolder {
         public Holder(@LayoutRes int resId, ViewGroup parent) {
             super(LayoutInflater.from(parent.getContext()).inflate(resId, parent, false));
@@ -63,6 +68,7 @@ public class DukunganAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public void bind(DukunganEntity entity) {
             namaText.setText(entity.nama);
             ratingUser.setRating(entity.rating);
+            ratingUser.setFocusable(false);
             dukungan.setText(entity.dukungan);
         }
     }
