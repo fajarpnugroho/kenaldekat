@@ -17,6 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import id.symphonea.kenaldekat.Injector;
 import id.symphonea.kenaldekat.R;
+import id.symphonea.kenaldekat.analytic.AnalyticManager;
 import id.symphonea.kenaldekat.api.model.response.NewsResponse;
 import id.symphonea.kenaldekat.presenter.VideoPresenter;
 import id.symphonea.kenaldekat.view.DividerItemDecoration;
@@ -31,6 +32,7 @@ public class VideoFragment extends BaseFragment implements VideoView, BeritaAdap
     @Bind(R.id.recyclerview) RecyclerView recyclerView;
 
     @Inject VideoPresenter presenter;
+    @Inject AnalyticManager analyticManager;
 
     private BeritaAdapter adapter;
 
@@ -69,6 +71,10 @@ public class VideoFragment extends BaseFragment implements VideoView, BeritaAdap
     @Override
     public void showListBerita(NewsResponse newsResponse) {
         if (newsResponse.data.results.news.size() > 0) {
+
+            analyticManager.sendScreen("Show video of "
+                    + newsResponse.data.results.news.get(0).candidate.name);
+
             adapter.setNewsEntities(newsResponse.data.results.news);
             recyclerView.setAdapter(adapter);
         }
@@ -88,6 +94,9 @@ public class VideoFragment extends BaseFragment implements VideoView, BeritaAdap
     @Override
     public void onItemClickListener(String link) {
         if (!link.equals("Tidak ada")) {
+
+            analyticManager.sendEvent("Video", "Open video", link);
+
             Uri uri = Uri.parse(link);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             getActivity().startActivity(intent);

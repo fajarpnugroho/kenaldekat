@@ -18,6 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import id.symphonea.kenaldekat.Injector;
 import id.symphonea.kenaldekat.R;
+import id.symphonea.kenaldekat.analytic.AnalyticManager;
 import id.symphonea.kenaldekat.api.model.response.MediaResponse;
 import id.symphonea.kenaldekat.presenter.MediaPresenter;
 import id.symphonea.kenaldekat.view.DividerItemDecoration;
@@ -33,6 +34,7 @@ public class MediaFragment extends BaseFragment implements MediaView, MediaAdapt
     @Bind(R.id.loading) ProgressBar loading;
 
     @Inject MediaPresenter presenter;
+    @Inject AnalyticManager analyticManager;
 
     private MediaAdapter mediaAdapter;
 
@@ -72,6 +74,11 @@ public class MediaFragment extends BaseFragment implements MediaView, MediaAdapt
     @Override
     public void showJejakMedia(MediaResponse mediaResponse) {
         if (mediaResponse.data.results.rekam_jejak.size() > 0) {
+
+            analyticManager.sendScreen("Show rekam jejak from "
+                    + mediaResponse.data.results.rekam_jejak.get(0).paslon.nama_calon + " & "
+                    + mediaResponse.data.results.rekam_jejak.get(0).paslon.nama_wakil_calon);
+
             mediaAdapter.setMediaEntityList(mediaResponse.data.results.rekam_jejak);
             recyclerView.setAdapter(mediaAdapter);
         }
@@ -115,6 +122,9 @@ public class MediaFragment extends BaseFragment implements MediaView, MediaAdapt
 
     @Override
     public void openUrlToBrowser(String url) {
+
+        analyticManager.sendEvent("Rekam jejak", "Open news", url);
+
         Uri uri = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         getActivity().startActivity(intent);

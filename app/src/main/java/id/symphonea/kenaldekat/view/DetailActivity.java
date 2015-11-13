@@ -14,9 +14,13 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import id.symphonea.kenaldekat.Injector;
 import id.symphonea.kenaldekat.R;
+import id.symphonea.kenaldekat.analytic.AnalyticManager;
 import id.symphonea.kenaldekat.view.fragment.DukunganFragment;
 import id.symphonea.kenaldekat.view.fragment.MediaFragment;
 import id.symphonea.kenaldekat.view.fragment.ProfileFragment;
@@ -29,9 +33,14 @@ public class DetailActivity extends BaseActivity implements DetailView {
     @Bind(R.id.sliding_tabs) TabLayout slidingTabs;
     @Bind(R.id.viewpager) ViewPager viewPager;
 
+    @Inject AnalyticManager analyticManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Injector.INSTANCE.getApplicationComponent().inject(this);
+
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
@@ -59,7 +68,15 @@ public class DetailActivity extends BaseActivity implements DetailView {
                 onBackPressed();
                 break;
             case R.id.action_share:
+
                 Bundle bundle = getIntent().getExtras();
+
+                analyticManager.sendEvent(
+                        "Profile candidate",
+                        "Shared information",
+                        bundle.getString(MainActivity.EXTRA_URL)
+                );
+
 
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
@@ -85,7 +102,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
         adapter.addFragment(ProfileFragment.newInstance(paslonId), "PROFILE");
         adapter.addFragment(MediaFragment.newInstance(paslonId), "MEDIA");
         adapter.addFragment(VideoFragment.newInstance(paslonId), "VIDEO");
-        adapter.addFragment(new DukunganFragment(), "JAJAK PENDAPAT");
+        //adapter.addFragment(new DukunganFragment(), "JAJAK PENDAPAT");
 
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(3);
