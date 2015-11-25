@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import id.symphonea.kenaldekat.KenalDekatApp;
+import id.symphonea.kenaldekat.analytic.AnalyticManager;
 import id.symphonea.kenaldekat.api.ApiConfig;
 import id.symphonea.kenaldekat.api.model.response.CandidatesResponse;
 import id.symphonea.kenaldekat.api.model.response.ProvincesResponse;
@@ -34,6 +35,8 @@ public class MainPresenter implements BasePresenter {
 
     @Inject
     CandidateService candidateService;
+    @Inject
+    AnalyticManager analyticManager;
 
     private MainView view;
     private KenalDekatApp application;
@@ -82,9 +85,12 @@ public class MainPresenter implements BasePresenter {
 
         if (provinsiEntity != null) {
             provinceId = String.valueOf(provinsiEntity.id);
+            analyticManager.sendScreen("Show list candidate from province "
+                    + provinsiEntity.nama);
         } else {
             provinceId = null;
         }
+
 
         Call<CandidatesResponse> responseCall = candidateService.listOfCandidates(offset,
                 DEFAULT_LIMIT, provinceId, null, null, null, null, ApiConfig.API_KEY);

@@ -20,6 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import id.symphonea.kenaldekat.Injector;
 import id.symphonea.kenaldekat.R;
+import id.symphonea.kenaldekat.analytic.AnalyticManager;
 import id.symphonea.kenaldekat.api.model.response.CandidatesResponse;
 import id.symphonea.kenaldekat.api.model.response.ProvincesResponse;
 import id.symphonea.kenaldekat.api.model.response.ProvinsiEntity;
@@ -49,6 +50,8 @@ public class MainActivity extends BaseActivity implements MainView,
     @Inject
     MainPresenter presenter;
 
+    @Inject AnalyticManager analyticManager;
+
     private CandidatesAdapter candidatesAdapter;
 
     @Override
@@ -65,6 +68,8 @@ public class MainActivity extends BaseActivity implements MainView,
 
         presenter.initView(this);
         presenter.loadProvinces();
+
+        analyticManager.sendScreen("List all candidate screen");
     }
 
     @Override
@@ -182,6 +187,11 @@ public class MainActivity extends BaseActivity implements MainView,
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         hideList();
         ProvinsiEntity provinsiEntity = (ProvinsiEntity) parent.getItemAtPosition(position);
+
+        if (provinsiEntity != null) {
+            analyticManager.sendEvent("Province", "Choose province", provinsiEntity.nama);
+        }
+
         reset(STATE_LOADING);
         presenter.loadCandidates(provinsiEntity);
     }

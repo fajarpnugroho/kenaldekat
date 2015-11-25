@@ -17,6 +17,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import id.symphonea.kenaldekat.Injector;
 import id.symphonea.kenaldekat.R;
+import id.symphonea.kenaldekat.analytic.AnalyticManager;
 import id.symphonea.kenaldekat.api.model.response.DanaKampanyeResponse;
 import id.symphonea.kenaldekat.api.model.response.PaslonEntity;
 import id.symphonea.kenaldekat.api.model.response.VisionMissionResponse;
@@ -40,6 +41,7 @@ public class ProfileFragment extends BaseFragment implements ProfileView {
     @Bind(R.id.loading) ProgressBar loading;
 
     @Inject ProfilePresenter presenter;
+    @Inject AnalyticManager analyticManager;
 
     public ProfileFragment() {}
 
@@ -79,11 +81,15 @@ public class ProfileFragment extends BaseFragment implements ProfileView {
     @Override
     public void showDataProfile(final VisionMissionResponse visionMissionResponse) {
         if (visionMissionResponse.data.results.count > 0) {
+
             PaslonEntity calonEntity = visionMissionResponse.data.results.vision_missions
                     .get(0).paslon.get(0);
 
             PaslonEntity wakilEntity = visionMissionResponse.data.results.vision_missions.get(0)
                     .paslon.get(1);
+
+            analyticManager.sendScreen("Show candidate profile of " + calonEntity.nama + " & "
+                    + wakilEntity.nama);
 
             calonView.bind(calonEntity);
             wakilView.bind(wakilEntity);
@@ -105,6 +111,9 @@ public class ProfileFragment extends BaseFragment implements ProfileView {
     }
 
     private void showSumber(String sumber) {
+
+        analyticManager.sendEvent("Profile candidate", "Open source", sumber);
+
         Uri uri = Uri.parse(sumber);
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         getActivity().startActivity(intent);
